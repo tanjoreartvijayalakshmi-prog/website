@@ -94,16 +94,11 @@ export const updateProduct = async (req: Request, res: Response) => {
 
       if (req.file) {
         const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
-        if (product.images && product.images.length > 0) {
-          product.images[0].url = base64Image;
-          product.images[0].public_id = req.file.originalname || 'uploaded_image';
-        } else {
-          product.images = [{
-            url: base64Image,
-            public_id: req.file.originalname || 'uploaded_image',
-            isPrimary: true
-          }];
-        }
+        product.images = [{
+          url: base64Image,
+          public_id: req.file.originalname || 'uploaded_image',
+          isPrimary: true
+        }];
       }
 
       const updatedProduct = await product.save();
