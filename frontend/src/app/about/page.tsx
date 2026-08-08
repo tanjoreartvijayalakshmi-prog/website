@@ -41,7 +41,7 @@ export default function AboutPage() {
 
             <div className="space-y-6 text-foreground leading-relaxed text-lg font-normal">
               <p>
-                Mrs. Vijayalakshmi Prabakaran is a renowned drawing and Tanjore artist, and the Founder of Vijayalakshmi Tanjore Art Gallery in Puducherry. With over 35 years of experience, she has dedicated her life to preserving and promoting the rich heritage of traditional Tanjore painting.
+                Mrs. Vijayalakshmi Prabakaran is a renowned drawing artist, and the Founder of Vijayalakshmi Tanjore Art Gallery in Puducherry. With over 35 years of experience, she has dedicated her life to preserving and promoting the rich heritage of traditional Tanjore painting.
               </p>
               <p>
                 She has trained more than 32,000 students from India and abroad, inspiring artists of all ages through her passion for this timeless art form. Her excellence in Tanjore painting has earned her recognition in the Guinness World Records, making her one of the most respected names in the field.
