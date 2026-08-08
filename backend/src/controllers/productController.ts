@@ -73,3 +73,46 @@ export const deleteProduct = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+// @desc    Update a product
+// @route   PUT /api/products/:id
+// @access  Admin
+export const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { title, artist, description, category } = req.body;
+    const product = await Product.findById(req.params.id);
+
+    if (product) {
+      product.title = title || product.title;
+      product.artist = artist || product.artist;
+      product.description = description || product.description;
+      product.medium = category || product.medium;
+      
+      if (title) {
+        product.slug = title.toLowerCase().replace(/ /g, '-');
+      }
+
+      if (req.file) {
+        const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+        if (product.images && product.images.length > 0) {
+          product.images[0].url = base64Image;
+          product.images[0].public_id = req.file.originalname || 'uploaded_image';
+        } else {
+          product.images = [{
+            url: base64Image,
+            public_id: req.file.originalname || 'uploaded_image',
+            isPrimary: true
+          }];
+        }
+      }
+
+      const updatedProduct = await product.save();
+      res.json(updatedProduct);
+    } else {
+      res.status(404).json({ message: 'Product not found' });
+    }
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+};

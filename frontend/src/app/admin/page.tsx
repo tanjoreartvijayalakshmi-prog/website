@@ -9,6 +9,7 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
 
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editId, setEditId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     artist: '',
@@ -94,19 +95,23 @@ export default function AdminProductsPage() {
         data.append('image', imageFile);
       }
 
-      const res = await fetch('http://localhost:5000/api/products', {
-        method: 'POST',
+      const url = editId ? `http://localhost:5000/api/products/${editId}` : 'http://localhost:5000/api/products';
+      const method = editId ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
         body: data,
       });
       if (res.ok) {
         setShowAddForm(false);
+        setEditId(null);
         setFormData({ title: '', artist: '', description: '', category: '' });
         setImageFile(null);
         setImagePreview(null);
-        setMessage('Artwork published successfully.');
+        setMessage(editId ? 'Artwork updated successfully.' : 'Artwork published successfully.');
         fetchProducts();
       } else {
-        setMessage('Failed to publish artwork. Please try again.');
+        setMessage(editId ? 'Failed to update artwork.' : 'Failed to publish artwork. Please try again.');
       }
     } catch (error) {
       console.error(error);
@@ -114,6 +119,20 @@ export default function AdminProductsPage() {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleEdit = (product: Record<string, unknown>) => {
+    setEditId(String(product._id));
+    setFormData({
+      title: String(product.title || ''),
+      artist: String(product.artist || ''),
+      description: String(product.description || ''),
+      category: String(product.medium || '')
+    });
+    setImagePreview(String((product.images as Record<string, unknown>[])[0]?.url || ''));
+    setImageFile(null);
+    setShowAddForm(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -125,7 +144,14 @@ export default function AdminProductsPage() {
         </div>
         <button
           onClick={() => {
-            setShowAddForm(!showAddForm);
+            if (showAddForm) {
+              setShowAddForm(false);
+              setEditId(null);
+              setFormData({ title: '', artist: '', description: '', category: '' });
+              setImagePreview(null);
+            } else {
+              setShowAddForm(true);
+            }
             setMessage(null);
           }}
           className="bg-gold text-foreground px-5 py-2.5 text-sm font-medium tracking-widest uppercase hover:bg-primary hover:text-background transition-colors flex items-center gap-2 shadow-lg"
@@ -144,7 +170,7 @@ export default function AdminProductsPage() {
 
       {showAddForm && (
         <div className="bg-white p-6 md:p-8 rounded-lg shadow-xl border border-gold/20 mb-8">
-          <h2 className="text-xl font-heading font-bold text-foreground mb-2">Add New Artwork</h2>
+          <h2 className="text-xl font-heading font-bold text-foreground mb-2">{editId ? 'Edit Artwork' : 'Add New Artwork'}</h2>
           <div className="w-12 h-0.5 bg-gold mb-6"></div>
           <form onSubmit={handleAddSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -211,7 +237,7 @@ export default function AdminProductsPage() {
                 disabled={submitting}
                 className="bg-primary text-background px-6 py-3 uppercase tracking-widest text-sm font-medium hover:bg-gold hover:text-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submitting ? 'Publishing...' : 'Publish Artwork'}
+                {submitting ? (editId ? 'Saving...' : 'Publishing...') : (editId ? 'Save Changes' : 'Publish Artwork')}
               </button>
             </div>
           </form>
@@ -235,12 +261,20 @@ export default function AdminProductsPage() {
                     {String(product.medium || 'Artwork')}
                   </span>
                 </div>
-                <button
-                  onClick={() => handleDelete(String(product._id))}
-                  className="mt-4 flex items-center justify-center gap-2 w-full py-2 border border-red-300 text-red-600 hover:bg-red-50 transition-colors rounded-md text-sm"
-                >
-                  <Trash2 className="w-4 h-4" /> Remove
-                </button>
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <button
+                    onClick={() => handleEdit(product)}
+                    className="flex-1 flex items-center justify-center gap-2 py-2 border border-blue-300 text-blue-600 hover:bg-blue-50 transition-colors rounded-md text-sm"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(String(product._id))}
+                    className="flex-1 flex items-center justify-center gap-2 py-2 border border-red-300 text-red-600 hover:bg-red-50 transition-colors rounded-md text-sm"
+                  >
+                    <Trash2 className="w-4 h-4" /> Remove
+                  </button>
+                </div>
               </div>
             </div>
           ))}
