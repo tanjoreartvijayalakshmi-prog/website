@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F4EBE1; /* Warm golden cream background */
+  --foreground: #3C2B22; /* Deep dark brown for text */
+  --primary: #B28330; /* Golden brown for accents and buttons */
+  --gold: #C6A55B;
+  --brown: #9B8665;
+  --accent: #E3D9CC;
+  --white: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-gold: var(--gold);
+  --color-brown: var(--brown);
+  --color-accent: var(--accent);
+  --color-white: var(--white);
+
+  --font-sans: var(--font-lato), sans-serif;
+  --font-paint: var(--font-paint), cursive;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1F211E;
+    --foreground: #F9F8F3;
+    --primary: #7C8C57;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: var(--font-heading);
+}
