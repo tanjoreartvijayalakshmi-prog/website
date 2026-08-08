@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Plus, Trash2, UploadCloud, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +25,7 @@ export default function AdminProductsPage() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/products');
+      const res = await fetch(`${API_URL}/api/products`);
       if (res.ok) {
         setProducts(await res.json());
       }
@@ -36,7 +38,7 @@ export default function AdminProductsPage() {
     let active = true;
     (async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/products');
+        const res = await fetch(`${API_URL}/api/products`);
         if (active && res.ok) {
           setProducts(await res.json());
         }
@@ -60,7 +62,7 @@ export default function AdminProductsPage() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this artwork?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`${API_URL}/api/products/${id}`, {
         method: 'DELETE',
       });
       if (res.ok) {
@@ -95,7 +97,7 @@ export default function AdminProductsPage() {
         data.append('image', imageFile);
       }
 
-      const url = editId ? `http://localhost:5000/api/products/${editId}` : 'http://localhost:5000/api/products';
+      const url = editId ? `${API_URL}/api/products/${editId}` : `${API_URL}/api/products`;
       const method = editId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
