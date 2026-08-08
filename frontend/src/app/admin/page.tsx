@@ -113,11 +113,12 @@ export default function AdminProductsPage() {
         setMessage(editId ? 'Artwork updated successfully.' : 'Artwork published successfully.');
         fetchProducts();
       } else {
-        setMessage(editId ? 'Failed to update artwork.' : 'Failed to publish artwork. Please try again.');
+        const errData = await res.json().catch(() => ({}));
+        setMessage(editId ? `Failed to update: ${errData.error || errData.message || 'Unknown error'}` : `Failed to publish: ${errData.error || errData.message || 'Unknown error'}`);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setMessage('An error occurred. Please try again.');
+      setMessage(`Network error: ${error.message || 'Please try again'}`);
     } finally {
       setSubmitting(false);
     }
