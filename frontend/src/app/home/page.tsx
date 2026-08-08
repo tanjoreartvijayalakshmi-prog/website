@@ -126,9 +126,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { id: 1, src: "/images/WhatsApp Image 2026-08-04 at 09.50.56 (1).jpeg", title: "Saraswathi", desc: "Classic Tanjore" },
-              { id: 2, src: "/images/WhatsApp Image 2026-08-04 at 09.51.53.jpeg", title: "Murugar", desc: "Classic Tanjore" },
-              { id: 3, src: "/images/WhatsApp Image 2026-08-04 at 09.59.11.jpeg", title: "Goddess Kamatchi", desc: "Classic Tanjore" }
+              { id: 1, src: "/images/WhatsApp Image 2026-08-04 at 09.50.56 (1).jpeg", title: "Sri Saraswathi", desc: "Classic Tanjore" },
+              { id: 2, src: "/images/WhatsApp Image 2026-08-04 at 09.51.53.jpeg", title: "Sri Murugar", desc: "Classic Tanjore" },
+              { id: 3, src: "/images/WhatsApp Image 2026-08-04 at 09.59.11.jpeg", title: "Sri Lalithambigai", desc: "Classic Tanjore" }
             ].map((item) => (
               <Link key={item.id} href="/gallery" className="group cursor-pointer">
                 <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-primary/10 border border-white/5">

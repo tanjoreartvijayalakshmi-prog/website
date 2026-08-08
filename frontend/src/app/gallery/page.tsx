@@ -14,9 +14,7 @@ export default function GalleryPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/products`, {
-          signal: AbortSignal.timeout(5000),
-        });
+        const res = await fetch(`${API_URL}/api/products`);
         if (res.ok) {
           const data = await res.json();
           setArtworks(data);
@@ -45,7 +43,10 @@ export default function GalleryPage() {
 
         {/* Artworks Grid */}
         {loading ? (
-          <div className="text-center py-20 text-foreground/60 tracking-widest">LOADING COLLECTION...</div>
+          <div className="text-center py-20 flex flex-col items-center gap-3">
+            <div className="text-foreground/60 tracking-widest animate-pulse">LOADING COLLECTION...</div>
+            <div className="text-foreground/40 text-sm font-light max-w-xs">Please wait a moment while we connect to the secure server (this may take up to 30 seconds initially).</div>
+          </div>
         ) : (
           <div className="w-full">
             {artworks.length === 0 ? (
