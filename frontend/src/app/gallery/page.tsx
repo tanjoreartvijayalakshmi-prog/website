@@ -5,16 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const fallbackArtworks = [
-  { id: "1", title: "Saraswathi", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 09.50.56 (1).jpeg" },
-  { id: "2", title: "Murugar", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 09.51.53.jpeg" },
-  { id: "3", title: "Goddess Kamatchi", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 09.59.11.jpeg" },
-  { id: "4", title: "Krishna", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 09.59.110.jpeg" },
-  { id: "5", title: "Lakshmi", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 10.00.59.jpeg" },
-  { id: "6", title: "Ganesh", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 09.50.56.jpeg" },
-  { id: "7", title: "Vijayalakshmi", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-08-04 at 09.50.56 (2).jpeg" },
-  { id: "8", title: "Shiva Parvathi", artist: "Vijayalakshmi", medium: "Classic Tanjore", image: "/images/WhatsApp Image 2026-07-28 at 13.39.43.jpeg" },
-];
+
 
 export default function GalleryPage() {
   const [artworks, setArtworks] = useState<Record<string, unknown>[]>([]);
@@ -34,16 +25,13 @@ export default function GalleryPage() {
             return;
           }
         }
-      } catch {
-        // Backend not available — use fallback
+      } catch (error) {
+        console.error("Failed to fetch artworks:", error);
       }
-      setArtworks(fallbackArtworks);
       setLoading(false);
     };
     fetchProducts();
   }, []);
-
-  const displayArtworks = artworks.length > 0 ? artworks : fallbackArtworks;
 
   return (
     <div className="bg-background min-h-screen pt-20 pb-12">
