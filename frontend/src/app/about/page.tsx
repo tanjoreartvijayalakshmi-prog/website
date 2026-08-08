@@ -21,7 +21,7 @@ export default function AboutPage() {
               {/* Using a placeholder for the artist portrait */}
               <div className="absolute inset-0 bg-primary/5 shadow-2xl -translate-x-6 translate-y-6"></div>
               <Image
-                src="/images/WhatsApp Image 2026-07-28 at 13.44.26.jpeg"
+                src="/images/artist.jpeg"
                 alt="Artist Portrait"
                 fill
                 className="object-cover relative z-10"
@@ -41,7 +41,7 @@ export default function AboutPage() {
 
             <div className="space-y-6 text-foreground leading-relaxed text-lg font-normal">
               <p>
-                Mrs. Vijayalakshmi Prabakaran is a renowned Tanjore artist and the Founder of Vijayalakshmi Tanjore Art Gallery in Puducherry. With over 33 years of experience, she has dedicated her life to preserving and promoting the rich heritage of traditional Tanjore painting.
+                Mrs. Vijayalakshmi Prabakaran is a renowned drawing and Tanjore artist, and the Founder of Vijayalakshmi Tanjore Art Gallery in Puducherry. With over 35 years of experience, she has dedicated her life to preserving and promoting the rich heritage of traditional Tanjore painting.
               </p>
               <p>
                 She has trained more than 32,000 students from India and abroad, inspiring artists of all ages through her passion for this timeless art form. Her excellence in Tanjore painting has earned her recognition in the Guinness World Records, making her one of the most respected names in the field.
@@ -65,7 +65,7 @@ export default function AboutPage() {
                 <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">International Awards</p>
               </div>
               <div>
-                <h4 className="text-3xl font-heading text-gold mb-2">32+</h4>
+                <h4 className="text-3xl font-heading text-gold mb-2">35+</h4>
                 <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">Years of Experience in Tanjore Painting</p>
               </div>
             </div>
