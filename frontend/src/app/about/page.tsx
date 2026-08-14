@@ -51,10 +51,18 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="mt-12 grid grid-cols-2 gap-8 border-t border-foreground/10 pt-10">
+            <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-8 border-t border-foreground/10 pt-10">
               <div>
                 <h4 className="text-3xl font-heading text-gold mb-2">32,000+</h4>
                 <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">Students Trained Worldwide</p>
+              </div>
+              <div>
+                <h4 className="text-3xl font-heading text-gold mb-2">40+</h4>
+                <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">Countries Tanjore Paintings Traveled</p>
+              </div>
+              <div>
+                <h4 className="text-3xl font-heading text-gold mb-2">35+</h4>
+                <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">Years of Experience in Tanjore Painting</p>
               </div>
               <div>
                 <h4 className="text-3xl font-heading text-gold mb-2">2015</h4>
@@ -63,10 +71,6 @@ export default function AboutPage() {
               <div>
                 <h4 className="text-3xl font-heading text-gold mb-2">8</h4>
                 <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">International Awards</p>
-              </div>
-              <div>
-                <h4 className="text-3xl font-heading text-gold mb-2">35+</h4>
-                <p className="text-sm font-medium tracking-widest uppercase text-foreground/80">Years of Experience in Tanjore Painting</p>
               </div>
             </div>
           </motion.div>
@@ -237,6 +241,26 @@ export default function AboutPage() {
             </div>
           </div>
         </motion.div>
+
+        {/* Static Image Grid Section */}
+        <div className="mt-24 mb-12">
+          <div className="flex flex-col items-center mb-10">
+            <h2 className="text-4xl font-heading text-gold mb-4 text-center">Visual Journey</h2>
+            <div className="w-24 h-1 bg-gold"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+              <div key={num} className="relative aspect-square w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-shadow duration-500">
+                <Image 
+                  src={`/images/sliding-cards/${num}.jpeg`} 
+                  alt={`Artwork ${num}`} 
+                  fill 
+                  className="object-cover hover:scale-110 transition-transform duration-500" 
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* CTA Section */}
         <div className="mt-24 border-t border-foreground/10 pt-16 flex flex-col md:flex-row justify-between items-center gap-8">
